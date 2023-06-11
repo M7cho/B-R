@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <script>
+    function validateDateTime() {
+      var dateTimeInput = document.getElementById('date-time');
+      var selectedDateTime = new Date(dateTimeInput.value);
+      var currentDateTime = new Date();
+      if (selectedDateTime <= currentDateTime) {
+        alert("Please select a future date and time.");
+        dateTimeInput.value = ""; 
+        return false;
+      }
+
+      return true;
+    }
+    function generateConfirmationNumber() {
+      return Math.floor(1000000000 + Math.random() * 9000000000);
+    }
+
+    function handleFormSubmit(event) {
+      event.preventDefault();
+
+      if (!validateDateTime()) {
+        return;
+      }
+
+      var bookingSection = document.getElementById('booking-section');
+      bookingSection.style.display = "none";
+
+      var confirmationSection = document.getElementById('confirmation-section');
+      confirmationSection.style.display = "block";
+
+      var confirmationNumber = generateConfirmationNumber();
+      var firstName = document.getElementById('first-name').value;
+      var lastName = document.getElementById('last-name').value;
+
+      var confirmationNumberDisplay = document.getElementById('confirmation-number');
+      confirmationNumberDisplay.innerHTML = "Confirmation Number: #" + confirmationNumber;
+
+      var confirmationMessage = document.getElementById('confirmation-message');
+      confirmationMessage.innerHTML = "Thank you " + firstName + " " + lastName + " for booking with Bright & Right Line Painting! We have received your request and will be contacting you to keep you updated with our sites on this project.";
+    }
+  </script>
+</head>
+<body>
+  <div class="top-bar">
+    <p class="phone-number">
+      <span class="phone-icon"><img src="phone.png" alt="Phone Icon"></span>
+      613-851-7822
+    </p>
+  </div>
+  
+  <header>
+    <div class="logo">
+      <a href="HomePage.html"><img src="B&R.png" alt="Logo"></a>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="HomePage.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="specialists.html">Specialists</a></li>
+        <li><a href="bookNow.html">Book Now</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <div id="booking-section" class="booking-section">
+    <h2>Book Now</h2>
+    <form onsubmit="handleFormSubmit(event)">
+      <div class="form-group">
+        <label for="first-name" class="label-color">First Name:</label>
+        <input type="text" id="first-name" name="first-name" required>
+      </div>
+      <div class="form-group">
+        <label for="last-name" class="label-color">Last Name:</label>
+        <input type="text" id="last-name" name="last-name" required>
+      </div>
+      <div class="form-group">
+        <label for="email" class="label-color">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="phone" class="label-color">Phone:</label>
+        <input type="text" id="phone" name="phone" required>
+      </div>
+      <div class="form-group">
+        <label for="specialist" class="label-color">Specialist/Service:</label>
+        <select id="specialist" name="specialist" required>
+          <option value="Butch The Sign Specialist">Butch The Sign Specialist</option>
+          <option value="Basil The Line Specialist">Basil The Line Specialist</option>
+          <option value="Dave The Asphalt Specialist">Dave The Asphalt Specialist</option>
+          <option value="Full-Layout Package (All Specialists)">Full-Layout Package (All Specialists)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="date-time" class="label-color">Date and Time:</label>
+        <input type="datetime-local" id="date-time" name="date-time" required>
+      </div>
+      <div class="form-group">
+        <label for="project-details" class="label-color">Project Details:</label>
+        <textarea id="project-details" name="project-details"></textarea>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <div id="confirmation-section" class="confirmation-section" style="display: none;">
+    <h2>Confirmation</h2>
+    <p id="confirmation-number"></p>
+    <p id="confirmation-message"></p>
+  </div>
+  
+  <div class="help-bar">
+    <div class="contact-info">
+      <p>
+        <strong>Phone:</strong> 613-851-7822<br>
+        <strong>Emails:</strong> info@linepainting.ca, butch@linepainting.ca, dave@linepainting.ca
+      </p>
+    </div>
+    <div class="hours">
+      <p><strong>Hours:</strong> Open 24/7</p>
+    </div>
+    <div class="service-area">
+      <p>
+        <strong>Service area:</strong><br>
+        Ottawa and surroundings, Kanata, Barrhaven, Kemptville, Carleton Place, Amprior, Orleans, Cumberland, Rockland, Gloucester, Casselman, Limoges, Winchester
+      </p>
+    </div>
+  </div>
+  
+</body>
+</html>
